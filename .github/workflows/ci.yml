@@ -58,11 +58,12 @@ jobs:
           cache: true
       # Built from source with the runner's Go, as in names-go: the prebuilt
       # action binary lags and trips golangci-lint's "built with an older Go
-      # than the target" guard. A release that knows Go 1.27: v2.11.4, which
-      # names-go pins for 1.26, misreads 1.27's export data as type errors.
+      # than the target" guard. It has to read the toolchain's export data:
+      # v2.11.4 (names-go's pin, for 1.26) and v2.13.2 both fail on go1.27.2's
+      # as typecheck errors; v2.15.0 reads it.
       - name: golangci-lint
         run: |
-          go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.13.2
+          go install github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.15.0
           golangci-lint run ./...
 
   vuln:
