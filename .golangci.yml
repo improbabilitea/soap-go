@@ -1,0 +1,22 @@
+version: "2"
+
+run:
+  timeout: 5m
+
+# Release-grade gate for a public library, as in names-go. revive/stylecheck
+# are intentionally omitted: style bikeshedding is not a gate. depguard is not
+# needed either — the module takes no external dependency, and `make deps`
+# enforces it.
+linters:
+  default: none
+  enable:
+    - errcheck    # unchecked errors
+    - govet       # suspicious constructs
+    - ineffassign # unused assignments
+    - staticcheck # correctness + simplifications (incl. gosimple, stylecheck)
+    - unused      # unused code
+    - gosec       # security issues
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0

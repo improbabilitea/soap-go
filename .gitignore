@@ -1,0 +1,21 @@
+# Binaries
+/bin/
+*.exe
+
+# Test / coverage
+*.out
+coverage.*
+
+# Fuzz corpus found by the local runner (the seed corpus under testdata is tracked)
+testdata/fuzz/
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Local env
+.env
+
+# Agent-local settings
+.claude/settings.local.json
