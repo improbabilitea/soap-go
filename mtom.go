@@ -227,9 +227,9 @@ func multipartBody(envelope []byte, parts []part) (body []byte, contentType stri
 	var buf bytes.Buffer
 	mw := multipart.NewWriter(&buf)
 	root, err := mw.CreatePart(textproto.MIMEHeader{
-		"Content-Type":              {`application/xop+xml; charset=UTF-8; type="text/xml"`},
-		"Content-Transfer-Encoding": {"8bit"},
-		"Content-ID":                {"<" + rootContentID + ">"},
+		"Content-Type":              []string{`application/xop+xml; charset=UTF-8; type="text/xml"`},
+		"Content-Transfer-Encoding": []string{"8bit"},
+		"Content-ID":                []string{"<" + rootContentID + ">"},
 	})
 	if err != nil {
 		return nil, "", err
@@ -239,9 +239,9 @@ func multipartBody(envelope []byte, parts []part) (body []byte, contentType stri
 	}
 	for _, p := range parts {
 		w, err := mw.CreatePart(textproto.MIMEHeader{
-			"Content-Type":              {p.contentType},
-			"Content-Transfer-Encoding": {"binary"},
-			"Content-ID":                {"<" + p.contentID + ">"},
+			"Content-Type":              []string{p.contentType},
+			"Content-Transfer-Encoding": []string{"binary"},
+			"Content-ID":                []string{"<" + p.contentID + ">"},
 		})
 		if err != nil {
 			return nil, "", err
